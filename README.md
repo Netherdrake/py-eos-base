@@ -1,8 +1,8 @@
 ## Python EOS Base Library
-This is an unofficial Python EOS Base Library by [@furion](https://steemit.com/@furion).
+This is an unofficial Python EOS Base Library by [@furion](https://steemit.com/@furion).  
 Heavily influenced by past works of Dr.-Ing. Fabian Schuh ([@xeroc](https://github.com/xeroc))
 
-**Warning: This library is Work-in-progress, and is not suitable for any use!**
+**Warning: This library is work-in-progress, and is not suitable for any use!**
 
 ## See also
  
@@ -18,3 +18,5 @@ pip install -U https://github.com/Netherdrake/py-eos-base
  - Operations
  - Transaction Builder
  
+### License
+MIT
