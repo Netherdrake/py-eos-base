@@ -1,6 +1,7 @@
 import hashlib
 from binascii import hexlify, unhexlify
 
+import sys
 from Crypto.Cipher import AES
 
 from .base58 import Base58, base58decode
@@ -36,10 +37,10 @@ def encrypt(privkey, passphrase):
     addr = format(privkey.uncompressed.address, "BTC")
     a = bytes(addr, 'ascii')
     salt = hashlib.sha256(hashlib.sha256(a).digest()).digest()[0:4]
-    if "pylibscrypt" in globals():
-        key = pylibscrypt.scrypt(bytes(passphrase, "utf-8"), salt, 16384, 8, 8)
-    else:
+    if "scrypt" in sys.modules:
         key = scrypt.hash(passphrase, salt, 16384, 8, 8)
+    else:
+        key = pylibscrypt.scrypt(bytes(passphrase, "utf-8"), salt, 16384, 8, 8)
     (derived_half1, derived_half2) = (key[:32], key[32:])
     aes = AES.new(derived_half2)
     encrypted_half1 = _encrypt_xor(privkeyhex[:32], derived_half1[:16], aes)
@@ -71,10 +72,11 @@ def decrypt(encrypted_privkey, passphrase):
     assert flagbyte == b'\xc0', "Flagbyte has to be 0xc0"
     salt = d[0:4]
     d = d[4:-4]
-    if "pylibscrypt" in globals():
-        key = pylibscrypt.scrypt(bytes(passphrase, "utf-8"), salt, 16384, 8, 8)
-    else:
+    if "scrypt" in sys.modules:
         key = scrypt.hash(passphrase, salt, 16384, 8, 8)
+    else:
+        key = pylibscrypt.scrypt(bytes(passphrase, "utf-8"), salt, 16384, 8, 8)
+
     derivedhalf1 = key[0:32]
     derivedhalf2 = key[32:64]
     encryptedhalf1 = d[0:16]
