@@ -31,23 +31,11 @@ setup(
                    'pytest-console-scripts'],
 
     install_requires=[
-        'appdirs',
         'ecdsa',
         'pylibscrypt',
         'scrypt',
+        'passlib',
         'pycrypto',
-        'urllib3>=1.21.1',
-        'certifi',
-        'ujson',
-        'w3lib',
-        'maya',
         'toolz',
         'funcy',
-        'prettytable',
-        'voluptuous',
-    ],
-    entry_points={
-        'console_scripts': [
-            'eospy=eos.cli:legacy',
-        ]
-    })
+    ])

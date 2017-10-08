@@ -4,3 +4,7 @@ class EosdNoResponse(BaseException):
 
 class RPCError(BaseException):
     pass
+
+
+class WeakPasswordError(ValueError):
+    pass
