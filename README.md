@@ -10,7 +10,7 @@ Heavily influenced by past works of Dr.-Ing. Fabian Schuh ([@xeroc](https://gith
 
 ## Installation
 ```
-pip install -U https://github.com/Netherdrake/py-eos-base
+pip install -U git+https://github.com/Netherdrake/py-eos-base.git
 ```
 
 ## TODO:
